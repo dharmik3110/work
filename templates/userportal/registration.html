@@ -1,0 +1,61 @@
+{% load static %}
+{% load widget_tweaks %}
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Font Icon -->
+     <link rel="stylesheet" href="{% static 'signup/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+     <!-- Main css -->
+     <link rel="stylesheet" href="{% static 'signup/css/style.css' %}">
+</head>
+<body>
+    <form method="POST">
+       
+        {% csrf_token %}
+
+    <div class="main">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up {{ user_type }}</h2>
+                        <form method="POST" class="register-form" id="register-form">
+                            
+                            <div class="form-group">
+                                
+                                {% render_field form.username placeholder="Your Name" %}
+                            </div>
+                            <div class="form-group">
+                                {% render_field form.password placeholder="password"   %}
+                            </div>
+                            <div class="form-group">
+                                {% render_field  form.email placeholder="email" %}
+                            </div>
+                            <div class="form-group">
+                                {% render_field form.phone_number placeholder="Phone Number" %}
+                                 </div>
+                            <div class="form-group form-button">
+                                <input type="submit"  a href="user-login" name="signup" id="signup" class="form-submit" value="Register"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="{% static 'signup/images/signup-image.jpg' %}" alt="sing up image"></figure>
+                        <a href="#" class="signup-image-link">I am already member</a>
+                    </div>
+                </div>
+            </div>
+             <!-- JS -->
+    <script src="{% static 'signup/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'signup/js/main.js' %}"></script>
+
+        </section> 
+        
+</body>
+</html>   
+
+    
