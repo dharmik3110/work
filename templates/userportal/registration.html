@@ -1,4 +1,5 @@
 {% load static %}
+
 {% load widget_tweaks %}
   
 <!DOCTYPE html>
@@ -11,9 +12,9 @@
      <link rel="stylesheet" href="{% static 'signup/css/style.css' %}">
 </head>
 <body>
-    <form method="POST">
+    {% comment %} <form method="POST"> {% endcomment %}
        
-        {% csrf_token %}
+        {% comment %} {% csrf_token %} {% endcomment %}
 
     <div class="main">
 
@@ -25,21 +26,24 @@
                         <h2 class="form-title">Sign up {{ user_type }}</h2>
                         <form method="POST" class="register-form" id="register-form">
                             
+                            {% csrf_token %}
                             <div class="form-group">
-                                
                                 {% render_field form.username placeholder="Your Name" %}
                             </div>
                             <div class="form-group">
-                                {% render_field form.password placeholder="password"   %}
+                                {% render_field form.password1 placeholder="password"  %}
+                            </div>
+                            <div class="form-group">
+                                {% render_field form.password2 placeholder="password"  %}
                             </div>
                             <div class="form-group">
                                 {% render_field  form.email placeholder="email" %}
                             </div>
                             <div class="form-group">
-                                {% render_field form.phone_number placeholder="Phone Number" %}
-                                 </div>
+                                {% render_field  form.phone_number placeholder="num" %}
+                            </div>
                             <div class="form-group form-button">
-                                <input type="submit"  a href="user-login" name="signup" id="signup" class="form-submit" value="Register"/>
+                                <input type="submit" name="signup" a href="/userapp/login/" id="signup" class="form-submit" value="Register"/></a>
                             </div>
                         </form>
                     </div>

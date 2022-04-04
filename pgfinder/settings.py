@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from ensurepip import bootstrap
 from pathlib import Path
 import os
+from telnetlib import LOGOUT
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +44,7 @@ INSTALLED_APPS = [
     'owner',
     'generic',
     'UserApp',
-    'crispy_forms',
+    'crispy_forms',     
     
 ]
 AUTH_USER_MODEL = 'UserApp.User'
@@ -90,7 +92,7 @@ WSGI_APPLICATION = 'pgfinder.wsgi.application'
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pgfinder1',
+        'NAME': 'pgfinder2',
         'USER':'postgres',
         'PASSWORD':'1234',
         'HOST':'localhost',
@@ -141,11 +143,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
-
-
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "/homepage"
+
+LOGOUT_REDIRECT_URL = "/homepage"

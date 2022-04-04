@@ -8,7 +8,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib import messages
 from django.contrib.auth.views import redirect_to_login,LoginView
-from .forms import OwnerForm
+
 
 # Create your views here.
 

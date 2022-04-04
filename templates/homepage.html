@@ -19,7 +19,8 @@
     <!-- header -->
     <header>
     
-      <h1><a href="homepage">info@unnatiinformatics.com</a></h1>
+      <h1><a href="homepage" >{{request.user}}info@unnatiinformatics.com</a></h1>
+
       {% comment "" %}x<h1><a href="{% url 'homepage' %}" id="logo"></a></h1>{% endcomment %}
       <div class="wrapper">
         <ul id="icons">
@@ -28,9 +29,8 @@
           <li><a href="#" class="normaltip"><img src="{% static 'images/icon3.jpg' %}" alt=""></a></li>
           <li><button><a href="/userapp/user-registration/" type="submit"> User Register</button></a></li>
           <li><button><a href="/userapp/owner-registration/" type="submit"> Owner Register</button></a></li>
-          <li><button><a href="/userapp/login/" type="submit">User login</button></a></li>
-          <li><button><a href="owner-login/" type="submit"> owner login</button></a></li>
-          <li><button><a href="/admin" type="submit">logout</button></a></li>
+          <li><button><a href="/userapp/login/" type="submit">login</button></a></li>
+          <li><button><a href="/homepage" type="submit">logout</button></a></li>
 
           
         </ul>

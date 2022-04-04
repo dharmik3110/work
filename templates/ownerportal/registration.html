@@ -1,6 +1,7 @@
 {% load static %}
-{% load crispy_forms_tags %}
-<!DOCTYPE html>
+
+{% load widget_tweaks %}
+  
 <html lang="en">
 <head>
      <!-- Font Icon -->
@@ -10,42 +11,38 @@
      <link rel="stylesheet" href="{% static 'signup/css/style.css' %}">
 </head>
 <body>
-  
+    {% comment %} <form method="POST"> {% endcomment %}
        
+        {% comment %} {% csrf_token %} {% endcomment %}
 
     <div class="main">
-        {% csrf_token %} 
+
         <!-- Sign up form -->
         <section class="signup">
             <div class="container">
                 <div class="signup-content">
                     <div class="signup-form">
-                        <h2 class="form-title">Sign up{{ user_type }}</h2>
-                        <form method="POST" class="register-form" >
-                           
-       
+                        <h2 class="form-title">Sign up {{ user_type }}</h2>
+                        <form method="POST" class="register-form" id="register-form">
+                            
+                            {% csrf_token %}
                             <div class="form-group">
-                               
-                                {{form.username | as_crispy_field}}
+                                {% render_field form.username placeholder="Your Name" %}
                             </div>
                             <div class="form-group">
-                                
-                                {{form.password | as_crispy_field}}
-
-
-                                </div>
-                            <div class="form-group">
-                               
-                                {{form.email | as_crispy_field}}
-
+                                {% render_field form.password1 placeholder="password"  %}
                             </div>
                             <div class="form-group">
-                               
-                                {{form.phone_number | as_crispy_field}}
-
+                                {% render_field form.password2 placeholder="password"  %}
+                            </div>
+                            <div class="form-group">
+                                {% render_field  form.email placeholder="email" %}
+                            </div>
+                            <div class="form-group">
+                                {% render_field  form.phone_number placeholder="num" %}
                             </div>
                             <div class="form-group form-button">
-                                <input type="submit"  a href="owner-login" name="signup" id="signup" class="form-submit" value="Register"/>
+                                <input type="submit" name="signup" a href="/userapp/login/" id="signup" class="form-submit" value="Register"/></a>
                             </div>
                         </form>
                     </div>
@@ -63,5 +60,3 @@
         
 </body>
 </html>   
-
-    

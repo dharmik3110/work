@@ -18,8 +18,7 @@ urlpatterns = [
     path('contacts',views.contacts, name='contacts'),
     path('forpgowner',views.forpgowner, name='forpgowner'),
     path('aboutus',views.aboutus, name='aboutus'),
-    #path("owner-registration/",BaseRegisterViewowner.as_view(),name="owner-registration"),
-    #path('owner-login/',OwnerLogin.as_view(), name='login'),
+   
 ]
     
 

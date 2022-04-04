@@ -1,4 +1,3 @@
-import imp
 from django.db import models
 from django.contrib.auth.models import  AbstractUser
 from django.utils.translation import gettext_lazy as _
@@ -11,6 +10,7 @@ class User(Basefield,AbstractUser):
 
    is_owner= models.BooleanField(default=False)
    is_finder= models.BooleanField(default=False)
+ 
 
    class Meta():
        db_table="User"
@@ -21,12 +21,9 @@ class OwnerRegistration1(User,Basefield):
 # Create your models here.
 
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,related_name='owner')
-    #password = models.CharField(max_length=50, blank=False, default=False)
-    #email = models.EmailField(_('email address') ,max_length=150, unique=True)
-    #phone_number = PhoneNumberField(unique=True,null=False, region = 'IN')
     phone_regex = RegexValidator(regex=r'^[7-9]{1}\d{9}', message="Phone number must be entered in the format: '999999999'")
     phone_number = models.CharField(validators=[phone_regex], max_length=10, blank=True, unique=True) 
-   
+
     class Meta():
         db_table = "Owner1"
 
@@ -36,12 +33,9 @@ class FinderRegistration1(User,Basefield):
 # Create your models here.
 
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,related_name='finder')
-    #password = models.CharField(max_length=50, blank=False, default=False)
-    #email = models.EmailField(_('email address') ,max_length=150, unique=True)
-    #phone_number = PhoneNumberField(unique=True,null=False, region = 'IN')
     phone_regex = RegexValidator(regex=r'^[7-9]{1}\d{9}', message="Phone number must be entered in the format: '999999999'")
     phone_number = models.CharField(validators=[phone_regex], max_length=10, blank=True, unique=True) 
-   
+
     class Meta():
         db_table = "finder"
 

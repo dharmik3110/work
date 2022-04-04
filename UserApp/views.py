@@ -8,9 +8,9 @@ from django.views.generic import  ListView, CreateView, UpdateView, DeleteView, 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib import messages
-from django.contrib.auth.views import redirect_to_login,LoginView
+from django.contrib.auth.views import redirect_to_login,LoginView,LogoutView
 
-from UserApp.models import FinderRegistration1, User
+from UserApp.models import FinderRegistration1, OwnerRegistration1, User
 from .forms import FinderRegistrationForm, OwnerRegistrationForm, UserForm
 from django.contrib.auth import login,logout
 
@@ -19,40 +19,42 @@ from django.contrib.auth import login,logout
 
 class OwnerRegisterView(CreateView):
 
+    model = User
     form_class = OwnerRegistrationForm
     template_name = 'ownerportal/registration.html'
-    model = User
-  
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request,User)     
-        user.save()    
-        return super().form_valid(form)
 
+  
     def get_context_data(self, **kwargs):
         kwargs['user_type']='owner'
         return super().get_context_data(**kwargs)
 
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request,user)       
+        return redirect('/userapp/login')
+
+   
+
     #def get_success_message(self, cleaned_data):
-        username = cleaned_data["owner"]
-        return username + " - owner Created Successfully..!!"
+        #username = cleaned_data["owner"]
+        #return username + " - owner Created Successfully..!!"
 
 class FinderRegisterView(CreateView):
 
+    model = User
     form_class = FinderRegistrationForm
     template_name = 'userportal/registration.html'
-    model = User
+    
 
     def get_context_data(self, **kwargs):
-        kwargs['user_type']='finder'
+        kwargs['user_type']= 'finder'
         return super().get_context_data(**kwargs)
   
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)  
         return redirect('/userapp/login')
-        #return LoginView.as_view()(template_name='Userportal/login.html')
-    
+       
 
     #def get_success_message(self, cleaned_data):
         #username = cleaned_data["finder"]
@@ -67,9 +69,9 @@ class UserLogin1(LoginView):
         return self.render_to_response(self.get_context_data())
 
 
-class LogoutView(View):
+class LogoutView(LogoutView):
     def get(self, request):
-        logout(request)
+        logout(self.request.user)
         return redirect('/homepage')
     
   
