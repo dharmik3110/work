@@ -1,6 +1,8 @@
+from cgitb import html
 from pyexpat import model
 from sre_constants import SUCCESS
-from django.shortcuts import render
+from django.conf import settings
+# from django.shortcuts import render, render_to_response
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View
@@ -13,6 +15,9 @@ from django.contrib.auth.views import redirect_to_login,LoginView,LogoutView
 from UserApp.models import FinderRegistration1, OwnerRegistration1, User
 from .forms import FinderRegistrationForm, OwnerRegistrationForm, UserForm
 from django.contrib.auth import login,logout
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.core.mail import EmailMultiAlternatives
 
 
 # Create your views here.
@@ -30,7 +35,16 @@ class OwnerRegisterView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        login(self.request,user)       
+        login(self.request,user) 
+        username = form.cleaned_data.get("username")
+        password1 = form.cleaned_data.get("password1")
+        dict = {'username': username , 'password1': password1}
+        subject, from_email, to = 'subject', settings.EMAIL_HOST_USER, form.cleaned_data.get('email')
+        html_content = render_to_string('email.html',dict)
+        text_contant = strip_tags(html_content)
+        msg = EmailMultiAlternatives(subject,text_contant,from_email,[to])
+        msg.attach_alternative(html_content,"text/html")
+        msg.send()      
         return redirect('/userapp/login')
 
    
@@ -53,6 +67,15 @@ class FinderRegisterView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)  
+        username = form.cleaned_data.get("username")
+        password1 = form.cleaned_data.get("password1")
+        dict = {'username': username , 'password1': password1}
+        subject, from_email, to = 'subject', settings.EMAIL_HOST_USER, form.cleaned_data.get('email')
+        html_content = render_to_string('email.html',dict)
+        text_contant = strip_tags(html_content)
+        msg = EmailMultiAlternatives(subject,text_contant,from_email,[to])
+        msg.attach_alternative(html_content,"text/html")
+        msg.send()
         return redirect('/userapp/login')
        
 

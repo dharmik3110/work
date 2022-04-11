@@ -34,22 +34,23 @@
                                 {% render_field form.password1 placeholder="password"  %}
                             </div>
                             <div class="form-group">
-                                {% render_field form.password2 placeholder="password"  %}
+                                {% render_field form.password2 placeholder="confirm password"  %}
                             </div>
                             <div class="form-group">
                                 {% render_field  form.email placeholder="email" %}
                             </div>
                             <div class="form-group">
-                                {% render_field  form.phone_number placeholder="num" %}
+                                {% render_field  form.phone_number placeholder="phone number" %}
                             </div>
-                            <div class="form-group form-button">
-                                <input type="submit" name="signup" a href="/userapp/login/" id="signup" class="form-submit" value="Register"/></a>
+                            <div>
+                                {% comment %} <input type="submit" name="signup" a href="/userapp/login/" id="signup" class="form-submit" value="Register"/></a> {% endcomment %}
+                                <input class="btn btn-primary" type="Register"  value="Register">
                             </div>
                         </form>
                     </div>
                     <div class="signup-image">
                         <figure><img src="{% static 'signup/images/signup-image.jpg' %}" alt="sing up image"></figure>
-                        <a href="#" class="signup-image-link">I am already member</a>
+                        <a href="#"  a href="/userapp/login/" class="signup-image-link">I am already member</a>
                     </div>
                 </div>
             </div>
